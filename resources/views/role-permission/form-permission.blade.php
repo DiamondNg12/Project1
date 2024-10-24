@@ -1,8 +1,12 @@
-{{ Form::open(['url' => '#','method' => 'post']) }}
+{{ Form::open(['url' => route('permission.store'),'method' => 'post']) }}
+@php
+    // dd(route('permission.store'))
+@endphp
     <div class="form-group">
-        <label class="form-label">permission title</label>
-        {{ Form::text('title', old('title'), ['class' => 'form-control','id' => 'permission-title', 'placeholder' => 'Permission Title', 'required']) }}
+        <label class="form-label">Permission title</label>
+        <input type="text" class="form-control mb-2" name="title" required placeholder="Permission title">
+        <input type="text" class="form-control mb-2" name="name" required placeholder="Route name">
     </div>
-    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
 {{ Form::close() }}
