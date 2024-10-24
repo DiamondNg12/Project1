@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
+use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -38,7 +39,19 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //code here
+        // dd($request->title);
+        try {
+            $new_permission = new Permission();
+            $new_permission->name = $request->name;
+            $new_permission->title = $request->title;
+            $new_permission->guard_name = 'web';
+            $new_permission->save();
+            Toastr::success('Permission created successfully', 'Success');
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => false]);
+        }
     }
 
     /**

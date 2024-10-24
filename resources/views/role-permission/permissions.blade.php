@@ -28,7 +28,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    {{ Form::open(['url' => '#','method' => 'get']) }}
+                    {{ Form::open(['url' => route('role.store'),'method' => 'post']) }}
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
