@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder
                 'email' => 'user@example.com',
                 'password' => bcrypt('password'),
                 'phone_number' => '+12398190255',
-                'email_verified_at' => now(),
+                'email_verified_at' => now(),  
                 'user_type' => 'user',
                 'status' => 'inactive'
             ]
