@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -227,5 +228,9 @@ class HomeController extends Controller
     public function termsofuse(Request $request)
     {
         return view('terms-of-use');
+    }
+    public function baseFrontend(){
+        $users = User::all();
+        return view('base', compact('users'));
     }
 }

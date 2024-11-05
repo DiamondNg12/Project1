@@ -35,7 +35,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="{{asset('images/Flag/flag001.png')}}" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;">
             <span class="bg-primary"></span>
@@ -53,7 +53,7 @@
               </div>
             </div>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item dropdown">
           <a href="#"  class="nav-link" id="notification-drop" data-bs-toggle="dropdown" >
             <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
