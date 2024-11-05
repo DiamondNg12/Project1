@@ -30,6 +30,7 @@ Route::get('/storage', function () {
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('index');
 Route::get('/template', [HomeController::class, 'uisheet'])->name('uisheet');
+Route::get('/base-frontend', [HomeController::class, 'baseFrontend'])->name('baseFrontend');
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module

@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\App;
+
 function removeSession($session){
     if(\Session::has($session)){
         \Session::forget($session);
@@ -97,4 +100,17 @@ function getFileExistsCheck($media)
         }
     }
     return $mediaCondition;
+}
+
+function getTitleByRoute()
+{
+    try {
+        App::setLocale('vi');
+        $routeName = \Request::route()->getName();
+        $title = $routeName && trans('title.'.$routeName) != 'title.'.$routeName ? trans('title.'.$routeName) : '';
+        return $title;
+    } catch (\Exception $e) {
+        return '';
+    }
+
 }
