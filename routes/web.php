@@ -129,6 +129,7 @@ Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pa
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
 Route::prefix('khoa-dao-tao')->middleware('auth')->group(function () {
+    Route::resource('khoa-dao-tao', KhoaDaoTaoController::class);
     Route::get('list', [KhoaDaoTaoController::class, 'indexKhoaDaoTao'])->name('list_khoa_dao_tao');
 });
 

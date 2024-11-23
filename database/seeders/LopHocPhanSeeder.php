@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\LopHocPhan;
 use Illuminate\Database\Seeder;
 
 class LopHocPhanSeeder extends Seeder
@@ -13,7 +14,7 @@ class LopHocPhanSeeder extends Seeder
      */
     public function run()
     {
-        $lop_hoc_phan = [
+        $lop_hoc_phans = [
             [
               'ma_lop_hoc_phan' => 'KPDL-1-1-24(N01)',
               'ten_lop_hoc_phan' => 'Khai phá dữ liệu-1-1-24(N01)',
@@ -68,7 +69,7 @@ class LopHocPhanSeeder extends Seeder
             ]
 
         ];
-        foreach($lop_hoc_phan as $key => $value){
+        foreach($lop_hoc_phans as $key => $value){
             $lop_hoc_phan = LopHocPhan::create($value);
         }
     }

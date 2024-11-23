@@ -15,9 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // PermissionTableSeeder::class,
-            // RoleTableSeeder::class,
+            PermissionTableSeeder::class,
+            RoleTableSeeder::class,
+            KhoaDaoTaoSeeder::class,
+            KhoaHocSeeder::class,
+            LopHocCoSoSeeder::class,
+            MonHocSeeder::class,
             UserTableSeeder::class,
+            LopHocPhanSeeder::class,
         ]);
         // \App\Models\User::factory(40)->create()->each(function($user) {
         //     $user->assignRole('user');
