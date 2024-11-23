@@ -2,9 +2,14 @@
 
 // Controllers
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KhoaDaoTaoController;
+use App\Http\Controllers\KhoaHocController;
+use App\Http\Controllers\LopHocPhanController;
+use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
@@ -124,5 +129,21 @@ Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pa
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
 Route::prefix('khoa-dao-tao')->middleware('auth')->group(function () {
+    Route::get('list', [KhoaDaoTaoController::class, 'indexKhoaDaoTao'])->name('list_khoa_dao_tao');
+});
 
+Route::prefix('khoa-hoc')->middleware('auth')->group(function () {
+    Route::get('list', [KhoaHocController::class, 'indexKhoaHoc'])->name('list_khoa_hoc');
+});
+
+Route::prefix('mon-hoc')->middleware('auth')->group(function () {
+    Route::get('list', [MonHocController::class, 'indexMonHoc'])->name('list_mon_hoc');
+});
+
+Route::prefix('lop-hoc-phan')->middleware('auth')->group(function () {
+    Route::get('list', [LopHocPhanController::class, 'indexLopHocPhan'])->name('list_lop_hoc_phan');
+});
+
+Route::prefix('giang-vien')->middleware('auth')->group(function () {
+    Route::get('list', [TeacherController::class, 'indexTeacher'])->name('list_giang_vien');
 });
