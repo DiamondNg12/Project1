@@ -14,11 +14,12 @@ class CreateLopHocCoSosTable extends Migration
     public function up()
     {
         Schema::create('lop_hoc_co_sos', function (Blueprint $table) {
-            $table->id('ma_lop_hoc');
+            $table->id();
+            $table->string('ma_lop_hoc');
             $table->string('ten_lop_hoc');
             $table->string('co_van_hoc_tap');
-            $table->bigInteger('ma_khoa_dao_tao')->unsigned();
-            $table->foreign('ma_khoa_dao_tao')->references('ma_khoa_dao_tao')->on('khoa_dao_taos');
+            $table->bigInteger('ma_khoa_dao_tao_id')->unsigned();
+            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos');
             $table->timestamps();
         });
     }

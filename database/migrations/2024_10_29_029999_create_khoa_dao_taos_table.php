@@ -14,9 +14,11 @@ class CreateKhoaDaoTaosTable extends Migration
     public function up()
     {
         Schema::create('khoa_dao_taos', function (Blueprint $table) {
-            $table->id('ma_khoa_dao_tao');
-            $table->string('ten_khoa');
+            $table->id();
+            $table->string('ma_khoa_dao_tao');
+            $table->string('ten_khoa_dao_tao');
             $table->string('ngay_thanh_lap');
+            $table->integer('tinh_trang')->default(1)->comment('1: Đang hoạt động, 0: Không hoạt động');
             $table->timestamps();
         });
     }
