@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MonHoc;
 use Illuminate\Database\Seeder;
 
 class MonHocSeeder extends Seeder
@@ -13,7 +14,7 @@ class MonHocSeeder extends Seeder
      */
     public function run()
     {
-        $mon_hoc = [
+        $mon_hocs = [
             [
                 'ma_mon_hoc' => 'KPDL',
                 'ten_mon_hoc' => 'Khai phá dữ liệu',
@@ -45,7 +46,7 @@ class MonHocSeeder extends Seeder
                 'ma_khoa_dao_tao_id' => 1,
             ],
         ];
-        foreach($mon_hoc as $key => $value){
+        foreach($mon_hocs as $key => $value){
             $mon_hoc = MonHoc::create($value);
     }
 }

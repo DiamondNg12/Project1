@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KhoaDaoTao;
 use Illuminate\Http\Request;
 
 class KhoaDaoTaoController extends Controller
 {
-    public function indexKhoaDaoTao(Request $request)
+    public function index(Request $request)
     {
-        return view('khoaDaoTao.list');
+        $khoa_dao_taos = KhoaDaoTao::all();
+        return view('khoaDaoTao.list', compact('khoa_dao_taos'));
     }
 }

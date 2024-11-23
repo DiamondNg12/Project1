@@ -39,10 +39,10 @@ class UserRequest extends FormRequest
                     'email' => 'required|max:191|email|unique:users',
                     'phone_number'=>'max:13',
                     // 'userProfile.gender' =>  'required',
-                    'userProfile.country' =>  'max:191',
-                    'userProfile.state' =>  'max:191',
-                    'userProfile.city' =>  'max:191',
-                    'userProfile.pin_code' =>  'max:191',
+                    // 'userProfile.country' =>  'max:191',
+                    // 'userProfile.state' =>  'max:191',
+                    // 'userProfile.city' =>  'max:191',
+                    // 'userProfile.pin_code' =>  'max:191',
                 ];
                 break;
             case 'patch':
@@ -52,10 +52,10 @@ class UserRequest extends FormRequest
                     'phone_number'=>'max:13',
                     'password' => 'confirmed|min:8|nullable',
                     // 'userProfile.gender' =>  'required',
-                    'userProfile.country' =>  'max:191',
-                    'userProfile.state' =>  'max:191',
-                    'userProfile.city' =>  'max:191',
-                    'userProfile.pin_code' =>  'max:191',
+                    // 'userProfile.country' =>  'max:191',
+                    // 'userProfile.state' =>  'max:191',
+                    // 'userProfile.city' =>  'max:191',
+                    // 'userProfile.pin_code' =>  'max:191',
                 ];
                 break;
 

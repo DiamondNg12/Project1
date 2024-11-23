@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KhoaDaoTao;
 use Illuminate\Database\Seeder;
 
 class KhoaDaoTaoSeeder extends Seeder
@@ -13,7 +14,7 @@ class KhoaDaoTaoSeeder extends Seeder
      */
     public function run()
     {
-        $khoa_dao_tao = [
+        $khoa_dao_taos = [
             [
                 'ma_khoa_dao_tao' => 'CNTT',
                 'ten_khoa_dao_tao' => 'Công nghệ thông tin',
@@ -45,7 +46,7 @@ class KhoaDaoTaoSeeder extends Seeder
                 'tinh_trang' => 1,
             ]
             ];
-            foreach($khoa_dao_tao as $key => $value){
+            foreach($khoa_dao_taos as $key => $value){
                 $khoa_dao_tao = KhoaDaoTao::create($value);
             }
     }

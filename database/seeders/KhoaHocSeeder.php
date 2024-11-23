@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KhoaHoc;
 use Illuminate\Database\Seeder;
 
 class KhoaHocSeeder extends Seeder
@@ -13,7 +14,7 @@ class KhoaHocSeeder extends Seeder
      */
     public function run()
     {
-        $khoa_hocs=[
+        $khoa_hocs = [
             [
                 'ma_khoa_hoc' => 'K61',
                 'ten_khoa_hoc' => 'Khóa 61',
@@ -41,7 +42,7 @@ class KhoaHocSeeder extends Seeder
             ]
             ];
             foreach ($khoa_hocs as $key => $value) {
-                $khoa_hocs = KhoaHoc::create($value);
+                $khoa_hoc = KhoaHoc::create($value);
 
             }
     }

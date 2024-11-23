@@ -7,9 +7,6 @@
                         <div class="header-title">
                             <h5 class="card-title">Bộ lọc</h5>
                         </div>
-                        {{-- <div class="card-action">
-                             <a href="http://localhost/users/create" class="btn btn-sm btn-primary" role="button">Add User</a>
-                        </div> --}}
                     </div>
                     <div class="card-body px-0">
                         <div class="row mb-3">
@@ -48,6 +45,9 @@
                         <div class="header-title">
                             <h5 class="card-title">Danh sách khoa đào tạo</h5>
                         </div>
+                        <div class="card-action">
+                            <a href="#" class="btn btn-sm btn-primary" id="create-new-btn" role="button">Thêm Khoa Đào tạo</a>
+                       </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive ">
@@ -93,4 +93,39 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="createNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#create-new-btn').on('click', function() {
+            $('#createNewModal').modal('show');
+        });
+
+        $('.close-modal').on('click', function() {
+            $('#createNewModal').modal('hide');
+        });
+    </script>
+
+
 </x-app-layout>
