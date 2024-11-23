@@ -19,11 +19,13 @@ class CreateDiemMonHocsTable extends Migration
             $table->double('diem_thi');
             $table->double('diem_tong_ket');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('ma_mon_hoc')->unsigned();
-            $table->bigInteger('ma_lop_hoc_phan')->unsigned();
+            $table->bigInteger('ma_mon_hoc_id')->unsigned();
+            $table->bigInteger('ma_lop_hoc_phan_id')->unsigned();
+            $table->bigInteger('updated_by')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('ma_mon_hoc')->references('ma_mon_hoc')->on('mon_hocs');
-            $table->foreign('ma_lop_hoc_phan')->references('ma_lop_hoc_phan')->on('lop_hoc_phans');
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('ma_mon_hoc_id')->references('id')->on('mon_hocs');
+            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans');
             $table->timestamps();
         });
     }

@@ -15,11 +15,10 @@ class CreateKetQuaDangKisTable extends Migration
     {
         Schema::create('ket_qua_dang_kis', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('ma_lop_hoc_phan')->unsigned();
-            $table->string('ma_sinh_vien');
-            $table->string('ngay_dang_ki');
-            $table->foreign('ma_lop_hoc_phan')->references('ma_lop_hoc_phan')->on('lop_hoc_phans');
-
+            $table->bigInteger('ma_lop_hoc_phan_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans');
             $table->timestamps();
         });
     }

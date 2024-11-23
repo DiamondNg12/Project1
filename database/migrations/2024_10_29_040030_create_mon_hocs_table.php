@@ -14,11 +14,12 @@ class CreateMonHocsTable extends Migration
     public function up()
     {
         Schema::create('mon_hocs', function (Blueprint $table) {
-            $table->id('ma_mon_hoc');
+            $table->id();
+            $table->string('ma_mon_hoc');
             $table->string('ten_mon_hoc');
             $table->integer('so_tin_chi');
-            $table->bigInteger('ma_khoa_dao_tao')->unsigned();
-            $table->foreign('ma_khoa_dao_tao')->references('ma_khoa_dao_tao')->on('khoa_dao_taos');
+            $table->bigInteger('ma_khoa_dao_tao_id')->unsigned();
+            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos');
             $table->timestamps();
         });
     }
