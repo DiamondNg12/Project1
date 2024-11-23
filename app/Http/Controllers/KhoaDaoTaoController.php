@@ -12,4 +12,9 @@ class KhoaDaoTaoController extends Controller
         $khoa_dao_taos = KhoaDaoTao::all();
         return view('khoaDaoTao.list', compact('khoa_dao_taos'));
     }
+
+    public function store(Request $request)
+    {
+        
+    }
 }

@@ -130,7 +130,6 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 Route::prefix('khoa-dao-tao')->middleware('auth')->group(function () {
     Route::resource('khoa-dao-tao', KhoaDaoTaoController::class);
-    Route::get('list', [KhoaDaoTaoController::class, 'indexKhoaDaoTao'])->name('list_khoa_dao_tao');
 });
 
 Route::prefix('khoa-hoc')->middleware('auth')->group(function () {
