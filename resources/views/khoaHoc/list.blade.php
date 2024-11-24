@@ -35,7 +35,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -47,7 +46,6 @@
                             <a href="#" class="btn btn-sm btn-primary" id="create-new-btn" role="button">Thêm Khoá</a>
                        </div>
                     </div>
-                    
                     <div class="card-body px-0">
                         <div class="table-responsive ">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
@@ -83,7 +81,7 @@
                                         <th>Office</th>
                                         <th>Age</th>
                                         <th>Start date</th>
-                                        <th>Salary</th> 
+                                        <th>Salary</th>
                                     </tr>
                                 </tfoot> --}} -->
                             </table>
@@ -93,9 +91,6 @@
             </div>
         </div>
     </div>
-    
-
-
     <div class="modal fade" id="createNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
