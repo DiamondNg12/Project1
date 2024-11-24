@@ -138,7 +138,7 @@ Route::prefix('khoa-hoc')->middleware('auth')->group(function () {
 });
 
 Route::prefix('mon-hoc')->middleware('auth')->group(function () {
-    Route::get('list', [MonHocController::class, 'indexMonHoc'])->name('list_mon_hoc');
+    Route::resource('mon-hoc', MonHocController::class);
 });
 
 Route::prefix('lop-hoc-phan')->middleware('auth')->group(function () {
