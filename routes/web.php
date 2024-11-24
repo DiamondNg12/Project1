@@ -133,7 +133,8 @@ Route::prefix('khoa-dao-tao')->middleware('auth')->group(function () {
 });
 
 Route::prefix('khoa-hoc')->middleware('auth')->group(function () {
-    Route::get('list', [KhoaHocController::class, 'indexKhoaHoc'])->name('list_khoa_hoc');
+    Route::resource('khoa-hoc', KhoaHocController::class);
+    // Route::get('list', [KhoaHocController::class, 'indexKhoaHoc'])->name('list_khoa_hoc');
 });
 
 Route::prefix('mon-hoc')->middleware('auth')->group(function () {
