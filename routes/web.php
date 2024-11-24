@@ -128,16 +128,16 @@ Route::group(['prefix' => 'icons'], function() {
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
 
-Route::prefix('khoa-dao-tao')->middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('khoa-dao-tao', KhoaDaoTaoController::class);
 });
 
-Route::prefix('khoa-hoc')->middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('khoa-hoc', KhoaHocController::class);
     // Route::get('list', [KhoaHocController::class, 'indexKhoaHoc'])->name('list_khoa_hoc');
 });
 
-Route::prefix('mon-hoc')->middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('mon-hoc', MonHocController::class);
 });
 
