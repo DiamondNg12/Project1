@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class TraCuuDiemController extends Controller
 {
     public function index(Request $request){
-        return view('thongTinSinhVien.list');
+        return view('traCuuDiem.list');
     }
 }
