@@ -7,47 +7,63 @@
                         <div class="header-title">
                             <h5 class="card-title">Bộ lọc</h5>
                         </div>
-                        {{-- <div class="card-action">
-                             <a href="http://localhost/users/create" class="btn btn-sm btn-primary" role="button">Add User</a>
-                        </div> --}}
                     </div>
                     <div class="card-body px-0">
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <div class="mb-3 ms-3">
-                                    <label for="baseInput" class="form-label">Khoa</label>
+                                    <label for="baseInput" class="form-label">Mã lớp học phần</label>
                                     <input type="text" name="input" class="form-control" id="baseInput">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3 ms-3">
-                                    <label for="baseInput1" class="form-label">Môn học</label>
+                                    <label for="baseInput1" class="form-label">Tên lớp học phần</label>
                                     <input type="text" name="input1" class="form-control" id="baseInput1">
                                 </div>
                             </div>
+                            
                             <div class="col-md-4">
                                 <div class="mb-3 ms-3">
-                                    <label for="baseInput2" class="form-label">Giảng viên</label>
-                                    <input type="text" name="input2" class="form-control" id="baseInput2">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput3" class="form-label">Học kì</label>
-                                    <input type="text" name="input3" class="form-control" id="baseInput3">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput4" class="form-label">Tên lớp học phần</label>
+                                    <label for="baseInput4" class="form-label">Địa điểm học</label>
                                     <input type="text" name="input4" class="form-control" id="baseInput4">
                                 </div>
                             </div>
-                            
+                            <div class="col-md-4">
+                                <div class="mb-3 ms-3">
+                                    <label for="baseInput5" class="form-label">Học kì</label>
+                                    <input type="text" name="input5" class="form-control" id="baseInput5">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3 ms-3">
+                                    <label for="baseInput6" class="form-label">Đợt học</label>
+                                    <input type="text" name="input6" class="form-control" id="baseInput6">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3 ms-3">
+                                    <label for="baseInput7" class="form-label">Tên môn học</label>
+                                    <input type="text" name="input7" class="form-control" id="baseInput7">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3 ms-3">
+                                    <label for="baseInput8" class="form-label">Khoá học</label>
+                                    <input type="text" name="input8" class="form-control" id="baseInput8">
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="mb-3 ms-3">
+                                    <label for="baseInput10" class="form-label">Giảng viên đứng lớp</label>
+                                    <input type="text" name="input10" class="form-control" id="baseInput10">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center mb-2">
-                                <button type="button" class="btn btn-primary">Search</button>
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
                             </div>
                         </div>
                     </div>
@@ -61,39 +77,60 @@
                         <div class="header-title">
                             <h5 class="card-title">Danh sách môn học</h5>
                         </div>
+                        <div class="card-action">
+                            <a href="#" class="btn btn-sm btn-primary" id="create-new-btn" role="button">Thêm môn học</a>
+                       </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive ">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Lớp học phần</th>
-                                        <th>Môn học</th>
-                                        <th>Số tín chỉ</th>
-                                        <th>Giảng viên</th>
-                                        <th>Thời gian học</th>
-                                        <th>Địa điểm</th>
-                                        <th>Sĩ số</th>
-                                        <th>Đã đăng kí</th>  
+                                        <th>STT</th>
+                                        <th>Mã lớp học phần</th>
+                                        <th>Tên lớp học phần</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Địa điểm học</th>
+                                        <th>Học kì</th>
+                                        <th>Đợt học</th>
+                                        <th>Tên môn học</th>
+                                        <th>Khoá học</th>  
+                                        <th>Sinh viên tối đa</th> 
+                                        <th>Giảng viên đứng lớp</th> 
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 @php
                                     $key = 1;
                                 @endphp
                                 <tbody>
-                                    <!-- @foreach ([] as $user)
+                                @foreach ($lop_hoc_phans as $lop_hoc_phan)
                                         <tr>
                                             <td>{{ $key++ }}</td>
-                                            <td>{{ $user->getFullNameAttribute() }}</td>
-                                            <td>{{ $user->username }}</td>
-                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $lop_hoc_phan->ma_lop_hoc_phan }}</td>
+                                            <td>{{ $lop_hoc_phan->ten_lop_hoc_phan }}</td>
+                                            <td>{{ $lop_hoc_phan->ngay_bat_dau }}</td>
+                                            <td>{{ $lop_hoc_phan->ngay_ket_thuc }}</td>
+                                            <td>{{ $lop_hoc_phan->dia_diem_hoc }}</td>
+                                            <td>{{ $lop_hoc_phan->hoc_ki }}</td>
+                                            <td>{{ $lop_hoc_phan->dot_hoc }}</td>
+                                            <td>{{ $lop_hoc_phan->monHoc->ten_mon_hoc }}</td>
+                                            <td>{{ $lop_hoc_phan->khoaHoc->ten_khoa_hoc }}</td>
+                                            <td>{{ $lop_hoc_phan->sv_toi_da }}</td>
+                                            <td>{{ $lop_hoc_phan->giang_vien }}</td>
                                             <td>
-                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary" role="button">Edit</a>
-                                                <a href="{{ route('users.destroy', $user->id) }}" class="btn btn-sm btn-danger" role="button">Delete</a>
+                                            @php
+                                                    $data_object = json_encode($lop_hoc_phan);
+                                                @endphp
+                                                <a href="#" data-object="{{ $data_object }}" class="btn btn-sm btn-primary edit-button" 
+                                                role="button">Chỉnh sửa</a>
+                                            
+                                               
                                             </td>
+                                           
                                         </tr>
-                                    @endforeach -->
+                                    @endforeach
                                 </tbody>
                                 {{-- <tfoot>
                                     <tr>
@@ -112,4 +149,21 @@
             </div>
         </div>
     </div>
+
+   
+
+<script>
+    $('#create-new-btn').on('click', function() {
+        $('#createNewModal').modal('show');
+    });
+    $('#submit-btn').on('click', function() {
+        console.log('Button clicked');
+        $('#form-create').submit();
+    });
+    $('.close-modal').on('click', function() {
+        $('#createNewModal').modal('hide');
+        $('#editModal').modal('hide');
+        $('#deleteModal').modal('hide');
+    });
+</script>
 </x-app-layout>

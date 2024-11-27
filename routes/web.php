@@ -140,10 +140,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('mon-hoc', MonHocController::class);
 });
-
-Route::prefix('lop-hoc-phan')->middleware('auth')->group(function () {
-    Route::get('list', [LopHocPhanController::class, 'indexLopHocPhan'])->name('list_lop_hoc_phan');
+Route::middleware('auth')->group(function () {
+    Route::resource('lop-hoc-phan', LopHocPhanController::class);
 });
+
 
 Route::prefix('giang-vien')->middleware('auth')->group(function () {
     Route::get('list', [TeacherController::class, 'indexTeacher'])->name('list_giang_vien');

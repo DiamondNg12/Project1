@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MonHoc;
 use Illuminate\Http\Request;
 use App\Models\KhoaDaoTao;
+
 use Flasher\Toastr\Laravel\Facade\Toastr;
 class MonHocController extends Controller
 {
@@ -12,6 +13,7 @@ class MonHocController extends Controller
     {
         $mon_hocs = MonHoc::all();
         $khoa_dao_taos = KhoaDaoTao::all();
+        
         return view('monHoc.list', compact('mon_hocs','khoa_dao_taos'));
 
         
