@@ -55,6 +55,7 @@
                                         <th>Khóa</th>
                                         <th>Khoa</th>
                                         <th>Ngày thành lập</th>
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -67,23 +68,23 @@
                                             <td>{{ $khoaHoc->ma_khoa_hoc }}</td>
                                             <td>{{ $khoaHoc->ten_khoa_hoc }}</td>
                                             <td>{{ $khoaHoc->ngay_bat_dau }}</td>
-                                            <!-- <td>
-                                                <a href="#" class="btn btn-sm btn-primary" role="button">Edit</a>
-                                                <a href="#" class="btn btn-sm btn-danger" role="button">Delete</a>
-                                            </td> -->
+                                            <td>
+        
+                                            @php
+                                                    $data_object = json_encode($khoaHoc);
+                                                @endphp
+                                                <a href="#" data-object="{{ $data_object }}"
+                                                    class="btn btn-sm btn-primary edit-button" role="button">Chỉnh
+                                                    sửa</a>
+                                                <a href="#" data-id="{{ $khoaHoc->id }}"
+                                                    data-name="{{ $khoaHoc->ten_khoa_hoc }}"
+                                                    class="btn btn-sm btn-danger delete-btn" role="button">Xoá</a>
+                                            
+                                            </td> 
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <!-- {{-- <tfoot>
-                                    <tr>
-                                         <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot> --}} -->
+                            
                             </table>
                         </div>
                     </div>
@@ -96,7 +97,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tạo Khoá Đào Tạo mới</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo Khoá Học mới</h5>
                     <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -105,16 +106,16 @@
                     <form action="{{ route('khoa-hoc.store') }}" method="POST" id="form-create">
                         @csrf
                         <div class="mb-3">
-                            <label for="ma_khoa_hoc" class="form-label">Mã khoá</label>
+                            <label for="ma_khoa_hoc" class="form-label">Mã khoá học</label>
                             <input type="text" class="form-control" id="ma_khoa_hoc" name="ma_khoa_hoc">
                         </div>
                         <div class="mb-3">
-                            <label for="ten_khoa_hoc" class="form-label">Tên khoá</label>
+                            <label for="ten_khoa_hoc" class="form-label">Tên khoá học</label>
                             <input type="text" class="form-control" id="ten_khoa_hoc" name="ten_khoa_hoc">
                         </div>
                         <div class="mb-3">
-                            <label for="ngay_thanh_lap" class="form-label">Ngày thành lập</label>
-                            <input type="date" class="form-control" id="ngay_thanh_lap" name="ngay_thanh_lap">
+                            <label for="ngay_bat_dau" class="form-label">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
                         </div>
                     </form>
                 </div>
@@ -125,8 +126,78 @@
             </div>
         </div>
     </div>
+    
+
+
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Chỉnh sửa khoá học</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('khoa-hoc.update', ['khoa_hoc' => 0]) }}" method="POST" id="form-create">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="ma_khoa_hoc" class="form-label">Mã khoá học</label>
+                            <input type="text" class="form-control" id="ma_khoa_hoc" name="ma_khoa_hoc">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ten_khoa_hoc" class="form-label">Tên khoá học</label>
+                            <input type="text" class="form-control" id="ten_khoa_hoc"
+                                name="ten_khoa_hoc">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngay_bat_dau" class="form-label">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" id="ngay_bat_dau" name="ngay_bat_dau">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Huỷ
+                        bỏ</button>
+                    <button type="button" class="btn btn-primary" id="submit-update-btn">Chỉnh sửa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xoá khoá học</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{ route('khoa-hoc.destroy', ['khoa_hoc' => 0]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <h3 id="delete_title">Xác nhận xoá khoá học: </h3>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Huỷ</button>
+                    <button type="button" id="delete-submit-btn" class="btn btn-primary">Xoá</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
+        var update_id = 0;
+        var delete_id = 0;
         $('#create-new-btn').on('click', function() {
             $('#createNewModal').modal('show');
         });
@@ -135,9 +206,38 @@
             $('#form-create').submit();
         });
 
+        $('.edit-button').on('click', function() {
+            data = $(this).data('object');
+            update_id = data.id;
+            $('#editModal form').attr('action', '/khoa-hoc/' + update_id);
+            $('#editModal #ma_khoa_hoc').val(data.ma_khoa_hoc);
+            $('#editModal #ten_khoa_hoc').val(data.ten_khoa_hoc);
+            $('#editModal #ngay_bat_dau').val(data.ngay_bat_dau);
+            $('#editModal').modal('show');
+        });
+
+        $('#submit-update-btn').on('click', function() {
+            $('#editModal form').submit();
+        });
+
+        $('.delete-btn').on('click', function() {
+            delete_id = $(this).data('id');
+            $('#delete_title').text('Xác nhận xoá khoá học: ' + $(this).data('name'));
+            $('#deleteModal form').attr('action', '/khoa-hoc/' + delete_id);
+            $('#deleteModal').modal('show');
+        });
+
+        $('#delete-submit-btn').on('click', function() {
+            $('#deleteModal form').submit();
+        });
+
         $('.close-modal').on('click', function() {
             $('#createNewModal').modal('hide');
+            $('#editModal').modal('hide');
+            $('#deleteModal').modal('hide');
         });
+        
+        
     </script>
 
 </x-app-layout>
