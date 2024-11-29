@@ -1,6 +1,8 @@
 <?php
 
 // Controllers
+
+use App\Http\Controllers\DangKiHocPhanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhoaDaoTaoController;
 use App\Http\Controllers\KhoaHocController;
@@ -9,8 +11,12 @@ use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TraCuuDiemController;
 use App\Http\Controllers\UserController;
+use App\Models\Student;
+use App\Models\TraCuuDiem;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -147,4 +153,14 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('giang-vien')->middleware('auth')->group(function () {
     Route::get('list', [TeacherController::class, 'indexTeacher'])->name('list_giang_vien');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('thong-tin-sinh-vien', StudentController::class);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('tra-cuu-diem', TraCuuDiemController::class);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('dang-ki-hoc-phan', DangKiHocPhanController::class);
 });
