@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="{{asset('vendor/aos/dist/aos.css')}}" />
 
 <script src="{{asset('vendor/flasher/jquery.min.js')}}"></script>
+
+<link rel="stylesheet" href="{{asset('vendor/flasher/flash.min.css')}}" />
+<script src="{{asset('vendor/flasher/flasher.min.js')}}"></script>
 <style>
     th.hide-search input{
        display: none;
