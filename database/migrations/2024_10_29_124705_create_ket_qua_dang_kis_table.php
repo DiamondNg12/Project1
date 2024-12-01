@@ -17,8 +17,8 @@ class CreateKetQuaDangKisTable extends Migration
             $table->id();
             $table->bigInteger('ma_lop_hoc_phan_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans')->onDelete('cascade');
             $table->timestamps();
         });
     }

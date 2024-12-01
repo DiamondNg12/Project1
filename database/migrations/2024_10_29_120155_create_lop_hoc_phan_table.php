@@ -23,12 +23,10 @@ class CreateLopHocPhanTable extends Migration
             $table->string('hoc_ki');
             $table->integer('dot_hoc');
             $table->bigInteger('ma_mon_hoc_id')->unsigned();
-            $table->bigInteger('ma_khoa_hoc_id')->unsigned();
             $table->string('sv_toi_da');
             $table->bigInteger('giang_vien')->unsigned();
-            $table->foreign('ma_mon_hoc_id')->references('id')->on('mon_hocs');
-            $table->foreign('ma_khoa_hoc_id')->references('id')->on('khoa_hocs');
-            $table->foreign('giang_vien')->references('id')->on('users');
+            $table->foreign('ma_mon_hoc_id')->references('id')->on('mon_hocs')->onDelete('cascade');
+            $table->foreign('giang_vien')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

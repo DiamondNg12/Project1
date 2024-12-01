@@ -22,10 +22,10 @@ class CreateDiemMonHocsTable extends Migration
             $table->bigInteger('ma_mon_hoc_id')->unsigned();
             $table->bigInteger('ma_lop_hoc_phan_id')->unsigned();
             $table->bigInteger('updated_by')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('ma_mon_hoc_id')->references('id')->on('mon_hocs');
-            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('ma_mon_hoc_id')->references('id')->on('mon_hocs')->onDelete('cascade');
+            $table->foreign('ma_lop_hoc_phan_id')->references('id')->on('lop_hoc_phans')->onDelete('cascade');
             $table->timestamps();
         });
     }

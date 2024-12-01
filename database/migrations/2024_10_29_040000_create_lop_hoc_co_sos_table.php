@@ -18,8 +18,10 @@ class CreateLopHocCoSosTable extends Migration
             $table->string('ma_lop_hoc');
             $table->string('ten_lop_hoc');
             $table->string('co_van_hoc_tap');
+            $table->bigInteger('ma_khoa_hoc_id')->unsigned();
+            $table->foreign('ma_khoa_hoc_id')->references('id')->on('khoa_hocs')->onDelete('cascade');
             $table->bigInteger('ma_khoa_dao_tao_id')->unsigned();
-            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos');
+            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos')->onDelete('cascade');
             $table->timestamps();
         });
     }

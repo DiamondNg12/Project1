@@ -19,7 +19,7 @@ class CreateMonHocsTable extends Migration
             $table->string('ten_mon_hoc');
             $table->integer('so_tin_chi');
             $table->bigInteger('ma_khoa_dao_tao_id')->unsigned();
-            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos');
+            $table->foreign('ma_khoa_dao_tao_id')->references('id')->on('khoa_dao_taos')->onDelete('cascade');
             $table->timestamps();
         });
     }
