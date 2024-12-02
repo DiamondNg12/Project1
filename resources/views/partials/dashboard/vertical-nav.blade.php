@@ -957,6 +957,21 @@
                         <span class="item-name">Môn học</span>
                     </a>
                 </li>
+                <li class=" nav-item">
+                    <a class="nav-link {{ activeRoute(route('lop-hoc-phan.index')) }}"
+                        href="{{ route('lop-hoc-phan.index') }}">
+                        <i class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <g>
+                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                </g>
+                            </svg>
+                        </i>
+                        <i class="sidenav-mini-icon"> M </i>
+                        <span class="item-name">Lớp học phần</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
                         href="{{ route('special-pages.calender') }}">

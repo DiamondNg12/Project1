@@ -24,7 +24,7 @@ class MonHocController extends Controller
             
             $check = MonHoc::where('ma_mon_hoc', $request->ma_mon_hoc)->first();
             if ($check) {
-                Toastr::error('Mã môn học đã tồn tại', 'Lỗi');
+                session()->flash('error', 'Mã môn học đã tồn tại!');
                 return redirect()->route('mon-hoc.index');
             }
 
@@ -36,14 +36,14 @@ class MonHocController extends Controller
             ];
             $mon_hoc = MonHoc::create($mon_hoc_moi);
             if ($mon_hoc) {
-                Toastr::success('Thêm mới môn học thành công', 'Thành công');
+                session()->flash('success', 'Thêm mới môn học thành công!');
             } else {
-                Toastr::error('Thêm mới môn học tạo thất bại', 'Lỗi');
+                session()->flash('error', 'Thêm mới môn học thất bại!');
             }
             return redirect()->route('mon-hoc.index');
         } catch (\Exception $e) {
            
-            Toastr::error('Có lỗi xảy ra, vui lòng thử lại', 'Lỗi');
+            session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('mon-hoc.index');
         }
     }
@@ -57,14 +57,14 @@ class MonHocController extends Controller
                     'so_tin_chi' => $request->so_tin_chi ?? $mon_hoc->so_tin_chi,
                     'ma_khoa_dao_tao_id' => $request->ma_khoa_dao_tao_id ?? $mon_hoc->ma_khoa_dao_tao_id
                 ]);
-                Toastr::success('Cập nhật khoa đào tạo thành công', 'Thành công');
+                session()->flash('success', 'Cập nhật môn học thành công!');
             }else{
-                Toastr::error('Cập nhật khoa đào tạo thất bại', 'Lỗi');
+                session()->flash('error', 'Cập nhật môn học thất bại!');
             }
             return redirect()->route('mon-hoc.index');
 
         } catch (\Exception $e) {
-            Toastr::error('Có lỗi xảy ra, vui lòng thử lại', 'Lỗi');
+            session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('mon-hoc.index');
         }
     }
@@ -73,13 +73,13 @@ class MonHocController extends Controller
             $mon_hoc = MonHoc::find($mon_hoc);
             if($mon_hoc){
                 $mon_hoc->delete();
-                Toastr::success('Xóa môn học thành công', 'Thành công');
+                session()->flash('success', 'Xóa môn học thành công!');
             }else{
-                Toastr::error('Xóa môn học thất bại', 'Lỗi');
+                session()->flash('error', 'Xóa môn học thất bại!');
             }
             return redirect()->route('mon-hoc.index');
         } catch (\Exception $e) {
-            Toastr::error('Có lỗi xảy ra, vui lòng thử lại', 'Lỗi');
+            session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('mon-hoc.index');
         }
     }
