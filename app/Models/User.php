@@ -58,6 +58,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $this->roles->first()->name;
     }
 
+    public function khoaDaoTao()
+    {
+        return $this->hasOne(KhoaDaoTao::class, 'id', 'khoa_dao_tao_id');
+    }
+    
+    public function lopHocCoSo()
+    {
+        return $this->hasOne(LopHocCoSo::class, 'id', 'lop_hoc_co_so_id');
+    }
     // public function getFullNameAttribute()
     // {
     //     return $this->first_name . ' ' . $this->last_name;

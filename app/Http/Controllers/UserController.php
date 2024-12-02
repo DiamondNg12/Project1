@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -69,11 +70,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $data = User::with('userProfile','roles')->findOrFail($id);
+        $data = User::with('roles')->findOrFail($id);
 
         $profileImage = getSingleMedia($data, 'profile_image');
+        $auth = auth()->user();
 
-        return view('users.profile', compact('data', 'profileImage'));
+        return view('users.profile', compact('data', 'profileImage', 'auth'));
     }
 
     /**
@@ -159,6 +161,19 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with($status,$message);
+    }
 
+    public function redirectIndex(){
+        if(Auth::check()){
+            $auth_user = auth()->user();
+            if($auth_user->user_type == 'user'){
+                return redirect()->route('thong-tin-sinh-vien.index');
+            } else {
+                return redirect()->route('khoa-dao-tao.index');
+            }
+        } else {
+            return redirect()->route('login');
+        }
+        return redirect()->route('login');
     }
 }
