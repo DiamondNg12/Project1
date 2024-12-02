@@ -223,6 +223,7 @@
 
     <script>
          var update_id = 0;
+         var delete_id = 0;
         $('#create-new-btn').on('click', function() {
             $('#createNewModal').modal('show');
         });
