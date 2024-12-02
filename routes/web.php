@@ -39,7 +39,7 @@ Route::get('/storage', function () {
 });
 
 //UI Pages Routs
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('index');
+Route::get('/', [UserController::class, 'redirectIndex'])->middleware('auth')->name('redirectIndex');
 Route::get('/template', [HomeController::class, 'uisheet'])->name('uisheet');
 
 Route::group(['middleware' => 'auth'], function () {
