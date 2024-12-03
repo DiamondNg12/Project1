@@ -40,4 +40,9 @@ class LopHocPhan extends Model
     {
         return $this->hasMany(KetQuaDangKi::class, 'ma_lop_hoc_phan_id')->where('ma_lop_hoc_phan_id', $this->id)->count();
     }
+
+    public function getCheckAuthAlreadyRegisterdAttribute()
+    {
+        return $this->hasMany(KetQuaDangKi::class, 'ma_lop_hoc_phan_id')->where('user_id', auth()->id())->where('ma_lop_hoc_phan_id', $this->id)->count();
+    }
 }
