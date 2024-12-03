@@ -22,7 +22,11 @@ function randomString($length,$type = 'token'){
 
 function activeRoute($route, $isClass = false): string
 {
-    $requestUrl = request()->fullUrl() === $route ? true : false;
+    $fullUrl = request()->fullUrl();
+    if (strpos($fullUrl, '?') !== false) {
+        $fullUrl = substr($fullUrl, 0, strpos($fullUrl, '?'));
+    }
+    $requestUrl = $fullUrl === $route ? true : false;
 
     if($isClass) {
         return $requestUrl ? $isClass : '';

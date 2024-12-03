@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KetQuaDangKi;
 use App\Models\KhoaHoc;
 use App\Models\LopHocPhan;
 use App\Models\MonHoc;
@@ -13,6 +14,7 @@ class LopHocPhanController extends Controller
 {
     public function index(Request $request)
     {
+        // dd('aa');
         $lop_hoc_phans = LopHocPhan::all();
         $mon_hocs =MonHoc::all();
         $khoa_hocs = KhoaHoc::all();
@@ -60,8 +62,6 @@ class LopHocPhanController extends Controller
     }
     public function store(Request $request){
         try {
-           // dd($request->all()); 
-            
             $check = LopHocPhan::where('ma_lop_hoc_phan', $request->ma_lop_hoc_phan)->first();
             if ($check) {
                 session()->flash('error', 'Mã lớp học phần đã tồn tại!');
@@ -73,6 +73,8 @@ class LopHocPhanController extends Controller
                 'ten_lop_hoc_phan' => $request->ten_lop_hoc_phan,
                 'ngay_bat_dau' => $request->ngay_bat_dau,
                 'ngay_ket_thuc' => $request->ngay_ket_thuc,
+                'mo_dang_ki' => $request->ngay_mo_dang_ki ?? '',
+                'dong_dang_ki' => $request->ngay_khoa_dang_ki ?? '',
                 'dia_diem_hoc' => $request->dia_diem_hoc,
                 'hoc_ki' => $request->hoc_ki,
                 'dot_hoc' => $request->dot_hoc,
@@ -88,7 +90,7 @@ class LopHocPhanController extends Controller
             }
             return redirect()->route('lop-hoc-phan.index');
         } catch (\Exception $e) {
-           
+
             session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('lop-hoc-phan.index');
         }
@@ -110,9 +112,9 @@ class LopHocPhanController extends Controller
                     'sv_toi_da' => $request->sv_toi_da ?? $lop_hoc_phan->sv_toi_da,
                     'giang_vien' => $request->giang_vien ?? $lop_hoc_phan->giang_vien
                 ]);
-                session()->flash('success', 'Cập nhật khoa đào tạo thành công!');
+                session()->flash('success', 'Cập nhật lớp học phần thành công!');
             }else{
-                session()->flash('success', 'Cập nhật khoa đào tạo thất bại!');
+                session()->flash('success', 'Cập nhật lớp học phần thất bại!');
             }
             return redirect()->route('lop-hoc-phan.index');
 
@@ -126,15 +128,25 @@ class LopHocPhanController extends Controller
             $lop_hoc_phan = LopHocPhan::find($lop_hoc_phan);
             if($lop_hoc_phan){
                 $lop_hoc_phan->delete();
-                session()->flash('success', 'Xóa môn học thành công!');
+                session()->flash('success', 'Xóa lớp học phần thành công!');
             }else{
-                session()->flash('error', 'Xóa môn học thất bại!');
+                session()->flash('error', 'Xóa lớp học phần thất bại!');
             }
             return redirect()->route('lop-hoc-phan.index');
         } catch (\Exception $e) {
             session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('lop-hoc-phan.index');
         }
+    }
+
+    public function getLopHocPhanByMonHoc(Request $request){
+        $lop_hoc_phans = LopHocPhan::where('ma_mon_hoc_id', $request->mon_hoc_id)->get();
+        return view('diemMonHoc.selectors.lop_hoc_phan_selector', compact('lop_hoc_phans'));
+    }
+
+    public function getStudentList(Request $request){
+        $registered_list = KetQuaDangKi::with('student')->where('ma_lop_hoc_phan_id', $request->lop_hoc_phan_id)->get();
+        return view('diemMonHoc.dataTable', compact('registered_list'));
     }
 
 }

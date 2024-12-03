@@ -3,12 +3,14 @@
 // Controllers
 
 use App\Http\Controllers\DangKiHocPhanController;
+use App\Http\Controllers\DiemMonHocController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhoaDaoTaoController;
 use App\Http\Controllers\KhoaHocController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\LopHocPhanController;
+use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
@@ -140,21 +142,16 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 Route::middleware('auth')->group(function () {
     Route::resource('khoa-dao-tao', KhoaDaoTaoController::class);
-});
-
-Route::middleware('auth')->group(function () {
     Route::resource('khoa-hoc', KhoaHocController::class);
-    // Route::get('list', [KhoaHocController::class, 'indexKhoaHoc'])->name('list_khoa_hoc');
-});
-
-Route::middleware('auth')->group(function () {
     Route::resource('mon-hoc', MonHocController::class);
-});
-Route::middleware('auth')->group(function () {
     Route::resource('lop-hoc-phan', LopHocPhanController::class);
-});
-Route::middleware('auth')->group(function () {
-    Route::resource('lop-hoc-co-so', LopHocCoSoController::class);
+    Route::resource('tra-cuu-diem', TraCuuDiemController::class);
+    Route::resource('dang-ki-hoc-phan', DangKiHocPhanController::class);
+    Route::resource('diem-mon-hoc', DiemMonHocController::class);
+
+    Route::get('get-mon-hoc-by-khoa-dao-tao', [MonHocController::class, 'getMonHocByKhoaDaoTao'])->name('getMonHocByKhoaDaoTao');
+    Route::get('get-lop-hoc-phan-by-mon-hoc', [LopHocPhanController::class, 'getLopHocPhanByMonHoc'])->name('getLopHocPhanByMonHoc');
+    Route::get('get-students-by-lop-hoc-phan', [LopHocPhanController::class, 'getStudentList'])->name('getStudentsByLopHocPhan');
 });
 
 Route::prefix('giang-vien')->middleware('auth')->group(function () {
@@ -169,5 +166,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::resource('dang-ki-hoc-phan', DangKiHocPhanController::class);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('lop-hoc-co-so', LopHocCoSoController::class);
 });
 

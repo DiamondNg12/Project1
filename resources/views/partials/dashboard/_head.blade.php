@@ -1,7 +1,7 @@
 
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
+<link rel="shortcut icon" href="{{asset('images/logo.png')}}" />
 <link rel="stylesheet" href="{{asset('css/libs.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/hope-ui.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/custom.css?v=1.1.0')}}">
@@ -21,7 +21,7 @@
 
 <script src="{{asset('vendor/flasher/jquery.min.js')}}"></script>
 
-<link rel="stylesheet" href="{{asset('vendor/flasher/flash.min.css')}}" />
+<link rel="stylesheet" href="{{asset('vendor/flasher/flasher.min.css')}}" />
 <script src="{{asset('vendor/flasher/flasher.min.js')}}"></script>
 <style>
     th.hide-search input{

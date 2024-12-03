@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                        <h1>{{getTitleByRoute()}}</h1>
+                        <h2>{{getTitleByRoute()}}</h2>
 
                     </div>
                 </div>
