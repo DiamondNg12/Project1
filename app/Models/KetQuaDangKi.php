@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class KetQuaDangKi extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'ma_lop_hoc_phan_id',
+        'user_id'
+    ];
+
+    public function lopHocPhan()
+    {
+        return $this->belongsTo(LopHocPhan::class, 'lop_hoc_phan_id');
+    }
+
+    public function student(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

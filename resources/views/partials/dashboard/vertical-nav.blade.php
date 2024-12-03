@@ -987,86 +987,10 @@
                         <span class="item-name">Lớp học cơ sở</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
-                        href="{{ route('special-pages.calender') }}">
-                        <i class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                </g>
-                            </svg>
-                        </i>
-                        <i class="sidenav-mini-icon"> C </i>
-                        <span class="item-name">Calender</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ activeRoute(route('special-pages.kanban')) }}"
-                        href="{{ route('special-pages.kanban') }}">
-                        <i class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                </g>
-                            </svg>
-                        </i>
-                        <i class="sidenav-mini-icon"> K </i>
-                        <span class="item-name">kanban</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ activeRoute(route('special-pages.pricing')) }}"
-                        href="{{ route('special-pages.pricing') }}">
-                        <i class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                </g>
-                            </svg>
-                        </i>
-                        <i class="sidenav-mini-icon"> P </i>
-                        <span class="item-name">Pricing</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ activeRoute(route('special-pages.rtlsupport')) }}"
-                        href="{{ route('special-pages.rtlsupport') }}">
-                        <i class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                </g>
-                            </svg>
-                        </i>
-                        <i class="sidenav-mini-icon"> R </i>
-                        <span class="item-name">RTL Support</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ activeRoute(route('special-pages.timeline')) }}"
-                        href="{{ route('special-pages.timeline') }}">
-                        <i class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <g>
-                                    <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                </g>
-                            </svg>
-                        </i>
-                        <i class="sidenav-mini-icon"> T </i>
-                        <span class="item-name">Timeline</span>
-                    </a>
-                </li> --}}
             </ul>
         </li>
     </ul>
 @elseif (auth()->user()->role == 'user')
-    
         <ul class="navbar-nav iq-main-menu" id="sidebar">
     <li class="nav-item static-item" style="margin-bottom: 15px;">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
@@ -1121,8 +1045,4 @@
         </a>
     </li>
 </ul>
-
-
-       
-    
 @endif

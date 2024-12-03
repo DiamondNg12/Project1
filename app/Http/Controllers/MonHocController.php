@@ -13,15 +13,11 @@ class MonHocController extends Controller
     {
         $mon_hocs = MonHoc::all();
         $khoa_dao_taos = KhoaDaoTao::all();
-        
         return view('monHoc.list', compact('mon_hocs','khoa_dao_taos'));
-
-        
     }
     public function store(Request $request)
     {
         try {
-            
             $check = MonHoc::where('ma_mon_hoc', $request->ma_mon_hoc)->first();
             if ($check) {
                 session()->flash('error', 'Mã môn học đã tồn tại!');
@@ -42,7 +38,6 @@ class MonHocController extends Controller
             }
             return redirect()->route('mon-hoc.index');
         } catch (\Exception $e) {
-           
             session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             return redirect()->route('mon-hoc.index');
         }
@@ -83,6 +78,11 @@ class MonHocController extends Controller
             return redirect()->route('mon-hoc.index');
         }
     }
-    
+
+    public function getMonHocByKhoaDaoTao(Request $request){
+        $mon_hocs = MonHoc::where('ma_khoa_dao_tao_id', $request->khoa_dao_tao_id)->get();
+        return view('diemMonHoc.selectors.mon_hoc_selector', compact('mon_hocs'));
+    }
+
 }
 
