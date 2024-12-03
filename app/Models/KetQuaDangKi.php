@@ -22,4 +22,8 @@ class KetQuaDangKi extends Model
     public function student(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function diemMonHoc(){
+        return $this->belongsTo(DiemMonHoc::class, 'id', 'dang_ki_id');
+    }
 }
