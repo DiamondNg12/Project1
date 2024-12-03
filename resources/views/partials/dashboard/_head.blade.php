@@ -21,7 +21,7 @@
 
 <script src="{{asset('vendor/flasher/jquery.min.js')}}"></script>
 
-<link rel="stylesheet" href="{{asset('vendor/flasher/flash.min.css')}}" />
+<link rel="stylesheet" href="{{asset('vendor/flasher/flasher.min.css')}}" />
 <script src="{{asset('vendor/flasher/flasher.min.js')}}"></script>
 <style>
     th.hide-search input{
