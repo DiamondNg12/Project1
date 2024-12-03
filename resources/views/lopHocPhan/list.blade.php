@@ -261,7 +261,7 @@
                             <input type="text" class="form-control" id="dot_hoc" name="dot_hoc">
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="exampleFormControlSelect1">Tên môn học</label>
+                            <label class="form-label" for="exampleFormControlSelect1">Tên lớp học phần</label>
                             <select class="form-select" id="exampleFormControlSelect1" name="ma_mon_hoc_id">
                             <option selected="" disabled="">Chọn Tên môn học</option>
                             @foreach ($mon_hocs as $mon_hoc)
