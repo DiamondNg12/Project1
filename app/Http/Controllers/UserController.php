@@ -28,8 +28,8 @@ class UserController extends Controller
         // $assets = ['data-table'];
         // $headerAction = '<a href="'.route('users.create').'" class="btn btn-sm btn-primary" role="button">Add User</a>';
         // return $dataTable->render('global.datatable', compact('pageTitle','auth_user','assets', 'headerAction'));
-        $users= User::all();
-            return view('users.list-user', compact('users')); 
+        $users= User::where('user_type', '<>', 'admin')->get();
+        return view('users.list-user', compact('users'));
     }
 
     /**
@@ -94,22 +94,22 @@ class UserController extends Controller
             if (!in_array($role, ['admin', 'user', 'otherRole'])) {
                 throw new \Exception('Vai trò không hợp lệ');
             }
-    
+
             if ($user) {
                 $user->assignRole($request->user_type);
                 session()->flash('success', 'Thêm mới người dùng thành công!');
             } else {
                 session()->flash('error', 'Thêm mới người dùng thất bại!');
             }
-    
+
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             // session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
             session()->flash('error', 'Có lỗi xảy ra: ' . $e->getMessage());
             return redirect()->route('users.index');
         }
-      
-            
+
+
             $user_moi = [
                 'ho_ten' => $request->ho_ten,
                 // 'avatar' => $request->avatar,
@@ -125,7 +125,7 @@ class UserController extends Controller
                 'tinh_trang' => $request->tinh_trang,
             ];
             $user = User::create($user_moi);
-      
+
 
 
         // $request['password'] = bcrypt($request->password);
@@ -250,7 +250,7 @@ class UserController extends Controller
             if($auth_user->user_type == 'user'){
                 return redirect()->route('thong-tin-sinh-vien.index');
             } else {
-                return redirect()->route('khoa-dao-tao.index');
+                return redirect()->route('users.index');
             }
         } else {
             return redirect()->route('login');

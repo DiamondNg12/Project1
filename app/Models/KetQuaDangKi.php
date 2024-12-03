@@ -16,7 +16,7 @@ class KetQuaDangKi extends Model
 
     public function lopHocPhan()
     {
-        return $this->belongsTo(LopHocPhan::class, 'lop_hoc_phan_id');
+        return $this->belongsTo(LopHocPhan::class, 'ma_lop_hoc_phan_id', 'id');
     }
 
     public function student(){

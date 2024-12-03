@@ -12,7 +12,7 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <div class="mb-3 ms-3">
-                                    <label for="baseInput1" class="form-label">Mã sinh viên</label>
+                                    <label for="baseInput1" class="form-label">Mã</label>
                                     <input type="text" name="input1" class="form-control" id="baseInput1">
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h5 class="card-title">Danh sách user</h5>
+                            <h5 class="card-title">Danh sách người dùng</h5>
                         </div>
                         <div class="card-action">
                             <a href="#" class="btn btn-sm btn-primary" id="create-new-btn" role="button">Thêm user</a>
@@ -43,9 +43,10 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Ảnh</th>
-                                        <th>Tên sinh viên</th>
-                                        <th>Mã sinh viên</th>
+                                        {{-- <th>Ảnh</th> --}}
+                                        <th>Kiểu người dùng</th>
+                                        <th>Họ tên</th>
+                                        <th>Mã</th>
                                         <th>Ngày sinh</th>
                                         <th>Khoa đào tạo</th>
                                         <th>Khóa</th>
@@ -64,13 +65,20 @@
                                 @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $key++ }}</td>
-                                    <td><img src="{{ $user->avatar }}" alt="avatar" width="50"></td>
+                                    <td>
+                                        @if ($user->user_type == 'demo_admin')
+                                            <span class="badge bg-primary">Giảng viên</span>
+                                        @elseif ($user->user_type == 'user')
+                                            <span class="badge bg-primary">Sinh viên</span>
+                                        @endif
+                                    </td>
+                                    {{-- <td><img src="{{ $user->avatar }}" alt="avatar" width="50"></td> --}}
                                     <td>{{ $user->ho_ten }}</td>
                                     <td>{{ $user->code }}</td>
                                     <td>{{ $user->ngay_sinh }}</td>
-                                    <td>{{ $user->khoa_dao_tao_id }}</td>
-                                    <td>{{ $user->khoa_hoc_id }}</td>
-                                    <td>{{ $user->lop_hoc_co_so_id }}</td>
+                                    <td>{{ $user->khoaDaoTao ? $user->khoaDaoTao->ten_khoa_dao_tao : '' }}</td>
+                                    <td>{{ $user->khoaHoc ? $user->khoaHoc->ten_khoa_hoc : '' }}</td>
+                                    <td>{{ $user->lopHocCoSo ? $user->lopHocCoSo->ten_lop_hoc : '' }}</td>
                                     <td>{{ $user->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                     <td>{{ $user->cccd }}</td>
                                     <td>{{ $user->dia_chi }}</td>
