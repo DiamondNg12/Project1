@@ -22,13 +22,7 @@
                 <div class="profile-content tab-content">
                     <div id="profile-profile" class="tab-pane fade active show">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <div class="header-title">
-                                    <h4 class="card-title">Thông tin đào tạo</h4>
-                                </div>
-                            </div> --}}
                             <div class="card-body">
-                                
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4">
