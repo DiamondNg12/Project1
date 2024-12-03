@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -77,7 +77,12 @@
                                             <td>{{ $row->numberStudentRegisterd }}</td>
                                             <td>{{ $row->sv_toi_da }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary register_button" role="button">Đăng kí</a>
+                                                @if (!$row->checkAuthAlreadyRegisterd)
+                                                <a href="#" class="btn btn-sm btn-primary register_button" data-id="{{ $row->id }}" data-name="{{ $row->ten_lop_hoc_phan }}" role="button">Đăng kí</a>
+                                                @else
+                                                    <span class="badge bg-success">Đã đăng kí</span>
+                                                @endif
+
                                                 {{-- <a href="#" class="btn btn-sm btn-danger exampleModalBtn"
                                                     role="button">Delete</a> --}}
                                             </td>
@@ -106,17 +111,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmLabel">Modal title</h5>
+                    <h5 class="modal-title" id="confirmLabel">Xác nhận đăng kí</h5>
                     <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form action="{{ route('dang-ki-hoc-phan.store') }}" method="post">
+                        @csrf
+                        <h3 id="confirm_title">Xác nhận đăng kí lớp học phần: </h3>
+                        <input type="hidden" name="class_id" id="register_class_id_input">
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="confirm_register">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -124,10 +133,17 @@
 
 
     <script>
+        var register_id = 0;
         $('.register_button').on('click', function() {
-            console.log('click');
             event.preventDefault()
+            register_id = $(this).data('id');
+            $('#register_class_id_input').val(register_id);
+            $('#confirm_title').text('Xác nhận đăng kí lớp học phần : ' + $(this).data('name'));
             $('#confirm_modal').modal('show');
+        });
+
+        $('#confirm_register').on('click', function() {
+            $('#confirm_modal form').submit();
         });
 
         $('.close-modal').on('click', function() {
