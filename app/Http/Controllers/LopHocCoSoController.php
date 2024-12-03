@@ -17,17 +17,13 @@ class LopHocCoSoController extends Controller
         $khoa_dao_taos = KhoaDaoTao::all();
         $khoa_hocs = KhoaHoc::all();
         $co_van_hoc_tap = User::where('user_type', 'demo_admin')->get();
-        //dd($lop_hoc_co_sos);
         return view('lopHocCoSo.list', compact('lop_hoc_co_sos','co_van_hoc_tap','khoa_dao_taos','khoa_hocs'));
-    
     }
 
     
     public function store(Request $request)
     {
-        try {
-             //dd($request->all()); 
-             
+        try {             
              $check = LopHocCoSo::where('ma_lop_hoc', $request->ma_lop_hoc)->first();
              if ($check) {
                  session()->flash('error', 'Mã lớp học đã tồn tại!');

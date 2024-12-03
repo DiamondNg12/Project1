@@ -11,6 +11,17 @@ class KhoaHocController extends Controller
     public function index(Request $request)
     {
         $khoa_hocs = KhoaHoc::all();
+        if ($request->has('ma_khoa_hoc') || $request->has('ten_khoa_hoc')) {
+            $query = KhoaHoc::query();
+    
+            if ($request->filled('ma_khoa_hoc')) {
+                $query->where('ma_khoa_hoc', 'like', '%' . $request->ma_khoa_hoc . '%');
+            }
+            if ($request->filled('ten_khoa_hoc')) {
+                $query->where('ten_khoa_hoc', 'like', '%' . $request->ten_khoa_hoc . '%');
+            }
+            $khoa_hocs = $query->get();
+        }
         return view('khoaHoc.list', compact('khoa_hocs'));
     
     }

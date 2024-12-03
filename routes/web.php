@@ -7,6 +7,8 @@ use App\Http\Controllers\DiemMonHocController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhoaDaoTaoController;
 use App\Http\Controllers\KhoaHocController;
+use App\Http\Controllers\ListUserController;
+use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\LopHocPhanController;
 use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\MonHocController;
@@ -57,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+
+    ///Route::resource('new-user', UserController::class);
 });
 
 //App Details Page => 'Dashboard'], function() {

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
 use App\Models\User;
+use App\Models\KhoaDaoTao;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
+use App\Models\KhoaHoc;
+use App\Models\LopHocCoSo;
+use App\Models\LopHocPhan;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -19,11 +23,13 @@ class UserController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        $pageTitle = trans('global-message.list_form_title',['form' => trans('users.title')] );
-        $auth_user = AuthHelper::authSession();
-        $assets = ['data-table'];
-        $headerAction = '<a href="'.route('users.create').'" class="btn btn-sm btn-primary" role="button">Add User</a>';
-        return $dataTable->render('global.datatable', compact('pageTitle','auth_user','assets', 'headerAction'));
+        // $pageTitle = trans('global-message.list_form_title',['form' => trans('users.title')] );
+        // $auth_user = AuthHelper::authSession();
+        // $assets = ['data-table'];
+        // $headerAction = '<a href="'.route('users.create').'" class="btn btn-sm btn-primary" role="button">Add User</a>';
+        // return $dataTable->render('global.datatable', compact('pageTitle','auth_user','assets', 'headerAction'));
+        $users= User::all();
+            return view('users.list-user', compact('users')); 
     }
 
     /**
@@ -33,9 +39,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('status',1)->get()->pluck('title', 'id');
+        // $roles = Role::where('status',1)->get()->pluck('title', 'id');
 
-        return view('users.form', compact('roles'));
+        // return view('users.form', compact('roles'));
+        $users= User::all();
+        $khoa_dao_taos = KhoaDaoTao::all();
+        $khoa_hocs = KhoaHoc ::all();
+        $lop_hoc_co_sos= LopHocCoSo::all();
+        return view('users.new-user', compact('users','khoa_dao_taos','khoa_hocs','lop_hoc_co_sos'));
+
     }
 
     /**
@@ -44,24 +56,93 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $request['password'] = bcrypt($request->password);
 
-        $request['username'] = $request->username ?? stristr($request->email, "@", true) . rand(100,1000);
+        try {
+            //dd($request->all());
+            $gioiTinh = ($request->gioi_tinh == 'Nam') ? 1 : 2;  // Nam => 1, Nữ => 2
+            //dd($gioiTinh);
+            $tinh_trang = ($request->tinh_trang == 'Hoạt động') ? 1 : 2;
+            $check = User::where('code', $request->code)->first();
+            if ($check) {
+                session()->flash('error', 'Mã người dùng đã tồn tại');
+                return redirect()->route('users.create');
+            }
+            $user_moi = [
+                'ho_ten' => $request->ho_ten,
+                // 'avatar' => $request->avatar,
+                'code' => $request->code,
+                'ngay_sinh' => $request->ngay_sinh,
+                'khoa_dao_tao_id' => $request->khoa_dao_tao_id,
+                'khoa_hoc_id' => $request->khoa_hoc_id,
+                'lop_hoc_co_so_id' => $request->lop_hoc_co_so_id,
+                'gioi_tinh' => $gioiTinh,
+                'email' => $request->email,
+                'user_type' => $request->user_type,
+               'password' => $request->password,
+                'tinh_trang' =>$tinh_trang
+            ];
+            $user = User::create($user_moi);
+            // $userData = $request->only([
+            //     'ho_ten', 'code', 'ngay_sinh', 'khoa_dao_tao_id',
+            //     'khoa_hoc_id', 'lop_hoc_co_so_id', 'gioi_tinh',
+            //     'email', 'user_type','password', 'tinh_trang'
+            // ]);
+            // $user = User::create($userData);
+            $role = $request->user_type;
+            if (!in_array($role, ['admin', 'user', 'otherRole'])) {
+                throw new \Exception('Vai trò không hợp lệ');
+            }
+    
+            if ($user) {
+                $user->assignRole($request->user_type);
+                session()->flash('success', 'Thêm mới người dùng thành công!');
+            } else {
+                session()->flash('error', 'Thêm mới người dùng thất bại!');
+            }
+    
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            // session()->flash('error', 'Có lỗi xảy ra, vui lòng thử lại!');
+            session()->flash('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+            return redirect()->route('users.index');
+        }
+      
+            
+            $user_moi = [
+                'ho_ten' => $request->ho_ten,
+                // 'avatar' => $request->avatar,
+                'code' => $request->code,
+                'ngay_sinh' => $request->ngay_sinh,
+                'khoa_dao_tao_id' => $request->khoa_dao_tao_id,
+                'khoa_hoc_id' => $request->khoa_hoc_id,
+                'lop_hoc_co_so_id' => $request->lop_hoc_co_so_id,
+                'gioi_tinh' => $request->gioi_tinh,
+                'email' => $request->email,
+                'user_type' => $request->user_type,
+               'password' => $request->password,
+                'tinh_trang' => $request->tinh_trang,
+            ];
+            $user = User::create($user_moi);
+      
 
-        $user = User::create($request->all());
 
-        storeMediaFile($user,$request->profile_image, 'profile_image');
+        // $request['password'] = bcrypt($request->password);
 
-        $user->assignRole('user');
+        // $request['username'] = $request->username ?? stristr($request->email, "@", true) . rand(100,1000);
 
-        // Save user Profile data...
-        $user->userProfile()->create($request->userProfile);
+        // $user = User::create($request->all());
 
-        return redirect()->route('users.index')->withSuccess(__('message.msg_added',['name' => __('users.store')]));
+        // storeMediaFile($user,$request->profile_image, 'profile_image');
+
+        // $user->assignRole('user');
+
+        // // Save user Profile data...
+        // $user->userProfile()->create($request->userProfile);
+
+        // return redirect()->route('users.index')->withSuccess(__('message.msg_added',['name' => __('users.store')]));
     }
-
     /**
      * Display the specified resource.
      *
