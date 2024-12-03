@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <div class="card-body px-5">
-                        <form action="{{route('diem-mon-hoc.index')}}" method="get">
+                        <form action="{{ route('diem-mon-hoc.index') }}" method="get">
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <div class="mb-3 ms-3">
@@ -40,7 +40,8 @@
                                 <div class="col-md-4" id="lop_hoc_phan_input">
                                     <div class="mb-3 ms-3">
                                         <label for="lop_hoc_phan_selector" class="form-label">Lớp học phần</label>
-                                        <select class="form-select" id="lop_hoc_phan_selector" name="lop_hoc_phan_id" required>
+                                        <select class="form-select" id="lop_hoc_phan_selector" name="lop_hoc_phan_id"
+                                            required>
                                             <option selected="" disabled="">Chọn Lớp học phần</option>
                                             @if ($lop_hoc_phan_id !== 0)
                                                 @foreach ($lop_hoc_phans as $lop_hoc_phan)
@@ -55,7 +56,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-center mb-2">
-                                    <button type="submit" id="search-button" class="btn btn-primary">Tìm kiếm</button>
+                                    <button type="submit" id="search-button" class="btn btn-primary">Tìm
+                                        kiếm</button>
                                 </div>
                             </div>
                         </form>
@@ -64,46 +66,72 @@
             </div>
         </div>
         @if ($lop_hoc_phan_id !== 0)
-        <div class="row" id="dataTableDomRow">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div class="header-title">
-                            <h5 class="card-title">Danh sách sinh viên</h5>
-                        </div>
-                        {{-- <div class="card-action">
+            <div class="row" id="dataTableDomRow">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h5 class="card-title">Danh sách sinh viên</h5>
+                            </div>
+                            {{-- <div class="card-action">
                             <a href="http://localhost/users/create" class="btn btn-sm btn-primary" role="button">Add
                                 User</a>
                         </div> --}}
-                    </div>
-                    <div class="card-body px-0">
-                        <div class="table-responsive" id="dataTableContainer">
-                            <table id="datatable" class="table table-striped" data-toggle="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Stt</th>
-                                        <th>Họ tên</th>
-                                        <th>Mã sinh viên</th>
-                                    </tr>
-                                </thead>
-                                @php
-                                    $key = 1;
-                                @endphp
-                                <tbody>
-                                    @foreach ($registered_list as $single_register)
-                                        <tr>
-                                            <td>{{ $key++ }}</td>
-                                            <td>{{ $single_register->student->ho_ten }}</td>
-                                            <td>{{ $single_register->student->ma_student }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        </div>
+                        <div class="card-body px-0">
+                            <form method="POST" action="{{ route('diem-mon-hoc.store') }}">
+                                @csrf
+                                <div class="table-responsive" id="dataTableContainer">
+                                    <table id="datatable" class="table table-striped" data-toggle="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Stt</th>
+                                                <th>Họ tên</th>
+                                                <th>Mã sinh viên</th>
+                                                <th>Điểm quá trình</th>
+                                                <th>Điểm thi</th>
+                                                <th>Điểm tổng kết</th>
+                                            </tr>
+                                        </thead>
+                                        @php
+                                            $key = 1;
+                                        @endphp
+                                        <tbody>
+                                            @foreach ($registered_list as $single_register)
+                                                <tr>
+                                                    <td>{{ $key++ }}</td>
+                                                    <td>{{ $single_register->student->ho_ten }}</td>
+                                                    <td>{{ $single_register->student->ma_student }}</td>
+                                                    <td>
+                                                        <input type="number" class="form-control w-75"
+                                                            name="diems[{{ $single_register->id }}][qua_trinh]"
+                                                            value="{{ $single_register->diemMonHoc ? $single_register->diemMonHoc->diem_qua_trinh : '' }}"
+                                                            min="0" max="10" step="0.1">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" class="form-control w-75"
+                                                            name="diems[{{ $single_register->id }}][thi]"
+                                                            value="{{ $single_register->diemMonHoc ? $single_register->diemMonHoc->diem_thi : '' }}"
+                                                            min="0" max="10" step="0.1">
+                                                    </td>
+                                                    <td>
+                                                        {{ $single_register->diemMonHoc ? $single_register->diemMonHoc->diem_tong_ket : '' }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center mb-2">
+                                        <button type="submit" id="search-button" class="btn btn-primary">Lưu</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -129,9 +157,9 @@
 
     <script>
         $(document).ready(function() {
-            let lop_hoc_phan_id = {{$lop_hoc_phan_id}};
-            let khoa_dao_tao_id = {{$khoa_dao_tao_id}};
-            let mon_hoc_id = {{$mon_hoc_id}};
+            let lop_hoc_phan_id = {{ $lop_hoc_phan_id }};
+            let khoa_dao_tao_id = {{ $khoa_dao_tao_id }};
+            let mon_hoc_id = {{ $mon_hoc_id }};
             if (lop_hoc_phan_id !== 0) {
                 console.log(lop_hoc_phan_id);
 
