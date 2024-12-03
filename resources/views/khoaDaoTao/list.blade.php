@@ -8,32 +8,23 @@
                             <h5 class="card-title">Bộ lọc</h5>
                         </div>
                     </div>
-                    <div class="card-body px-0">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput" class="form-label">Mã khoa</label>
-                                    <input type="text" name="input" class="form-control" id="baseInput">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput1" class="form-label">Tên khoa</label>
-                                    <input type="text" name="input1" class="form-control" id="baseInput1">
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput2" class="form-label">Ngày thành lập</label>
-                                    <input type="text" name="input2" class="form-control" id="baseInput2">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-body px-4">
+                    <form method="GET" action="{{ route('khoa-dao-tao.index') }}">
                         <div class="row">
-                            <div class="col-md-12 text-center mb-2">
-                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                            <div class="col-md-4">
+                                <input type="text" name="ma_khoa_dao_tao" class="form-control" placeholder="Mã khoa đào tạo"
+                                    value="{{ request('ma_khoa_dao_tao') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="ten_khoa_dao_tao" class="form-control" placeholder="Tên khoa đào tạo"
+                                    value="{{ request('ten_khoa_dao_tao') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                             </div>
                         </div>
+                    </form>
+
                     </div>
                 </div>
             </div>

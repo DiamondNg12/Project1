@@ -13,7 +13,20 @@ class MonHocController extends Controller
     {
         $mon_hocs = MonHoc::all();
         $khoa_dao_taos = KhoaDaoTao::all();
-        
+        if ($request->has('ten_mon_hoc') || $request->has('ten_khoa_dao_tao')) {
+            $query = MonHoc::query();
+            if ($request->filled('ten_mon_hoc')) {
+                $query->where('ten_mon_hoc', 'like', '%' . $request->ten_mon_hoc . '%');
+            }
+            if ($request->filled('ten_khoa_dao_tao')) {
+                $query->whereHas('khoaDaoTao', function($q) use ($request) {
+                    $q->where('ten_khoa_dao_tao', 'like', '%' . $request->ten_khoa_dao_tao . '%');
+                });
+            }
+    
+            // Lấy kết quả tìm kiếm từ MonHoc
+            $mon_hocs = $query->get();
+        }
         return view('monHoc.list', compact('mon_hocs','khoa_dao_taos'));
 
         

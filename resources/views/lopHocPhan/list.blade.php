@@ -8,58 +8,60 @@
                             <h5 class="card-title">Bộ lọc</h5>
                         </div>
                     </div>
-                    <div class="card-body px-0">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput" class="form-label">Mã lớp học phần</label>
-                                    <input type="text" name="input" class="form-control" id="baseInput">
+                    <div class="card-body px-4">
+                        <form method="GET" action="{{ route('lop-hoc-phan.index') }}">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="ma_lop_hoc" class="form-label">Mã lớp học phần</label>
+                                        <input type="text" name="ma_lop_hoc_phan" class="form-control" id="ma_lop_hoc_phan" 
+                                            value="{{ request('ma_lop_hoc_phan') }}" placeholder="Nhập mã lớp học phần">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="ten_lop_hoc_phan" class="form-label">Tên lớp học phần</label>
+                                        <input type="text" name="ten_lop_hoc_phan" class="form-control" id="ten_lop_hoc_phan" 
+                                            value="{{ request('ten_lop_hoc_phan') }}" placeholder="Nhập tên lớp học phần">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="hoc_ki" class="form-label">Học kỳ</label>
+                                        <input type="text" name="hoc_ki" class="form-control" id="hoc_ki" 
+                                            value="{{ request('hoc_ki') }}" placeholder="Nhập học kỳ">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="dot_hoc" class="form-label">Đợt học</label>
+                                        <input type="text" name="dot_hoc" class="form-control" id="dot_hoc" 
+                                            value="{{ request('dot_hoc') }}" placeholder="Nhập đợt học">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="ten_mon_hoc" class="form-label">Tên môn học</label>
+                                        <input type="text" name="ten_mon_hoc" class="form-control" id="ten_mon_hoc" 
+                                            value="{{ request('ten_mon_hoc') }}" placeholder="Nhập tên môn học">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="giang_vien" class="form-label">Giảng viên đứng lớp</label>
+                                        <input type="text" name="giang_vien" class="form-control" id="giang_vien" 
+                                            value="{{ request('giang_vien') }}" placeholder="Nhập giảng viên đứng lớp">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput1" class="form-label">Tên lớp học phần</label>
-                                    <input type="text" name="input1" class="form-control" id="baseInput1">
-                                </div>
+                            <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                             </div>
-                            
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput4" class="form-label">Địa điểm học</label>
-                                    <input type="text" name="input4" class="form-control" id="baseInput4">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput5" class="form-label">Học kì</label>
-                                    <input type="text" name="input5" class="form-control" id="baseInput5">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput6" class="form-label">Đợt học</label>
-                                    <input type="text" name="input6" class="form-control" id="baseInput6">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput7" class="form-label">Tên môn học</label>
-                                    <input type="text" name="input7" class="form-control" id="baseInput7">
-                                </div>
-                            </div>   
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput10" class="form-label">Giảng viên đứng lớp</label>
-                                    <input type="text" name="input10" class="form-control" id="baseInput10">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-center mb-2">
-                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
-                            </div>
-                        </div>
+        </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>

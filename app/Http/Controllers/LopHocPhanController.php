@@ -17,6 +17,45 @@ class LopHocPhanController extends Controller
         $mon_hocs =MonHoc::all();
         $khoa_hocs = KhoaHoc::all();
         $giang_vien = User::where('user_type', 'demo_admin')->get();
+        
+        if ($request->has('ma_lop_hoc') || $request->has('ten_lop_hoc') || $request->has('hoc_ki') || 
+        $request->has('dot_hoc') || $request->has('ten_mon_hoc') || $request->has('giang_vien')) {
+
+        // Khởi tạo query cho LopHocPhan để tìm kiếm
+        $query = LopHocPhan::query();
+
+        // Áp dụng các điều kiện tìm kiếm
+        if ($request->filled('ma_lop_hoc_phan')) {
+            $query->where('ma_lop_hoc_phan', 'like', '%' . $request->ma_lop_hoc_phan . '%');
+        }
+
+        if ($request->filled('ten_lop_hoc_phan')) {
+            $query->where('ten_lop_hoc_phan', 'like', '%' . $request->ten_lop_hoc_phan . '%');
+        }
+
+        if ($request->filled('hoc_ki')) {
+            $query->where('hoc_ki', 'like', '%' . $request->hoc_ki . '%');
+        }
+
+        if ($request->filled('dot_hoc')) {
+            $query->where('dot_hoc', 'like', '%' . $request->dot_hoc . '%');
+        }
+
+        if ($request->filled('ten_mon_hoc')) {
+            $query->whereHas('monHoc', function($q) use ($request) {
+                $q->where('ten_mon_hoc', 'like', '%' . $request->ten_mon_hoc . '%');
+            });
+        }
+
+        if ($request->filled('giang_vien')) {
+            $query->whereHas('giangVien', function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->giang_vien . '%');
+            });
+        }
+
+        // Lấy kết quả tìm kiếm từ LopHocPhan
+        $lop_hoc_phans = $query->get();
+    }
         return view('lopHocPhan.list', compact('lop_hoc_phans','mon_hocs','khoa_hocs','giang_vien'));
     }
     public function store(Request $request){

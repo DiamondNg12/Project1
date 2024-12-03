@@ -6,6 +6,8 @@ use App\Http\Controllers\DangKiHocPhanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhoaDaoTaoController;
 use App\Http\Controllers\KhoaHocController;
+use App\Http\Controllers\ListUserController;
+use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\LopHocPhanController;
 use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\Security\RolePermission;
@@ -55,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+
+    ///Route::resource('new-user', UserController::class);
 });
 
 //App Details Page => 'Dashboard'], function() {
@@ -149,7 +153,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('lop-hoc-phan', LopHocPhanController::class);
 });
-
+Route::middleware('auth')->group(function () {
+    Route::resource('lop-hoc-co-so', LopHocCoSoController::class);
+});
 
 Route::prefix('giang-vien')->middleware('auth')->group(function () {
     Route::get('list', [TeacherController::class, 'indexTeacher'])->name('list_giang_vien');
@@ -164,3 +170,4 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('dang-ki-hoc-phan', DangKiHocPhanController::class);
 });
+

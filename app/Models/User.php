@@ -21,15 +21,20 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      *
      * @var array
      */
+    // protected $fillable = [
+    //     'username',
+    //     'first_name',
+    //     'last_name',
+    //     'phone_number',
+    //     'status',
+    //     'banned',
+    //     'email',
+    //     'password',
+    // ];
     protected $fillable = [
-        'username',
-        'first_name',
-        'last_name',
-        'phone_number',
-        'status',
-        'banned',
-        'email',
-        'password',
+        'ho_ten', 'code', 'ngay_sinh', 'khoa_dao_tao_id',
+        'khoa_hoc_id', 'lop_hoc_co_so_id', 'gioi_tinh',
+        'email', 'user_type', 'password', 'tinh_trang'
     ];
 
     /**
@@ -62,8 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $this->hasOne(KhoaDaoTao::class, 'id', 'khoa_dao_tao_id');
     }
-    
-    public function lopHocCoSo()
+    public function khoaHoc()
+    {
+        return $this->hasOne(KhoaHoc::class, 'id', 'khoa_hoc_id');
+    }
+   
+     public function lopHocCoSo()
     {
         return $this->hasOne(LopHocCoSo::class, 'id', 'lop_hoc_co_so_id');
     }

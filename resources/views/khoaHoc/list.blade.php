@@ -7,30 +7,25 @@
                         <div class="header-title">
                             <h5 class="card-title">Bộ lọc</h5>
                         </div>
-                        {{-- <div class="card-action">
-                             <a href="http://localhost/users/create" class="btn btn-sm btn-primary" role="button">Add User</a>
-                        </div> --}}
                     </div>
-                    <div class="card-body px-0">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput" class="form-label">Khoa đào tạo</label>
-                                    <input type="text" name="input" class="form-control" id="baseInput">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3 ms-3">
-                                    <label for="baseInput1" class="form-label">Khóa</label>
-                                    <input type="text" name="input1" class="form-control" id="baseInput1">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-body px-4">
+                    <form method="GET" action="{{ route('khoa-hoc.index') }}">
                         <div class="row">
-                            <div class="col-md-12 text-center mb-2">
-                                <button type="button" class="btn btn-primary">Search</button>
+                            <div class="col-md-4">
+                                <input type="text" name="ma_khoa_hoc" class="form-control" placeholder="Mã khoá học"
+                                    value="{{ request('ma_khoa_hoc') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="ten_khoa_hoc" class="form-control" placeholder="Tên khóa học"
+                                    value="{{ request('ten_khoa_hoc') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                             </div>
                         </div>
+                    </form>
+
+                    </div>
                     </div>
                 </div>
             </div>
@@ -52,8 +47,8 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Khóa</th>
-                                        <th>Khoa</th>
+                                        <th>Mã khóa học</th>
+                                        <th>Tên khóa học</th>
                                         <th>Ngày thành lập</th>
                                         <th>Thao tác</th>
                                     </tr>

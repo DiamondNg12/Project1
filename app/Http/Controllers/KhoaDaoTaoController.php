@@ -11,6 +11,19 @@ class KhoaDaoTaoController extends Controller
     public function index(Request $request)
     {
         $khoa_dao_taos = KhoaDaoTao::all();
+        if ($request->has('ma_khoa_dao_tao') || $request->has('ten_khoa_dao_tao')) {
+            $query = KhoaDaoTao::query();
+    
+            if ($request->filled('ma_khoa_dao_tao')) {
+                $query->where('ma_khoa_dao_tao', 'like', '%' . $request->ma_khoa_dao_tao . '%');
+            }
+            if ($request->filled('ten_khoa_dao_tao')) {
+                $query->where('ten_khoa_dao_tao', 'like', '%' . $request->ten_khoa_dao_tao . '%');
+            }
+    
+            // Kết quả tìm kiếm
+            $khoa_dao_taos = $query->get();
+        }
         return view('khoaDaoTao.list', compact('khoa_dao_taos'));
     }
 
