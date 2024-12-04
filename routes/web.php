@@ -10,7 +10,6 @@ use App\Http\Controllers\KhoaHocController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\LopHocPhanController;
-use App\Http\Controllers\LopHocCoSoController;
 use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
@@ -160,12 +159,6 @@ Route::prefix('giang-vien')->middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('thong-tin-sinh-vien', StudentController::class);
-});
-Route::middleware('auth')->group(function () {
-    Route::resource('tra-cuu-diem', TraCuuDiemController::class);
-});
-Route::middleware('auth')->group(function () {
-    Route::resource('dang-ki-hoc-phan', DangKiHocPhanController::class);
 });
 Route::middleware('auth')->group(function () {
     Route::resource('lop-hoc-co-so', LopHocCoSoController::class);
